@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    *{
+        margin:0;padding:0;
+    }
+    .con{
+        width:500px;
+        height:500px;
+        /* background:yellow; */
+        margin:50px auto;
+        overflow:hidden;
+        position:relative;
+    }
+    #wrap{
+      /* background:pink; */
+      width:1500px;
+      height:500px;
+      margin:0;
+      list-style:none;
+      padding:0;
+     }
+     #wrap li{
+         width:500px;
+         height:500px;
+         float:left;
+     }
+     .circle{
+        position:absolute;
+        width:100px;
+        height:20px;
+        bottom:20px;
+        left:50px;
+        
+     }
+     span{
+         display:inline-block;
+         width:20px;
+         height:20px;
+         border:1px solid;
+         box-sizing:border-box;
+         margin-left: 10px;
+         cursor: pointer;
+         border-radius:50%;
+     }
+    </style>
+</head>
+<body>
+    <div class="con">
+        <ul id="wrap" >
+             <li style="background:pink">1</li>
+             <li style="background:yellow">2</li>
+             <li style="background:green">3</li>
+
+        </ul>
+        <div class="circle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+    </div>
+   <script>
+    var div=document.getElementsByTagName('div')[0];
+     var spanArr=document.getElementsByTagName('span');
+     //var liArr=document.getElementsByTagName('li');
+     var ul=document.getElementById('wrap');
+     //console.log(ul);
+    // console.log(ul.style.width);
+     var move=parseInt(window.getComputedStyle(div).width);
+     var len=spanArr.length;
+     for(var i=0;i<len;i++){
+         (function(j){
+            spanArr[j].onmouseover=function(){
+               // alert(liArr[j].innerHTML)
+               ul.style.marginLeft=-move*j+'px';
+            }
+         })(i)
+         
+     }
+     //console.log(liArr)
+   </script>
+</body>
+</html>
