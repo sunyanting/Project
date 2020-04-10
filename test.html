@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+     <style>
+       #demo{
+           position:absolute;
+           width:100px;
+           height:100px;
+           left:0;
+           top:0;
+           background:orange;
+           /* border-radius:50%; */
+
+       }
+    </style>
+</head>
+
+<body>
+    <div id="demo"></div>
+    <script>
+    var div=document.getElementById('demo');
+    console.log(div)
+    div.onclick=function(){
+        startMove(this);
+    }
+
+    function startMove(dom){
+        clearInterval(dom.timer);
+        var isSpeedX =6;
+        var isSpeedY=8;
+        var g=1;
+        dom.timer=setInterval(function(){
+            isSpeedY += g;
+            var newTop = dom.offsetTop + isSpeedY;
+            var newLeft = dom.offsetLeft + isSpeedX;
+            
+            if(newTop>=document.documentElement.clientHeight-dom.clientHeight  ){
+                isSpeedY *= -1;
+                isSpeedY *= 0.8;
+                isSpeedX *= 0.8;
+                newTop=document.documentElement.clientHeight-dom.clientHeight ;//解决出现纵向滚动条
+                console.log(dom.clientHeight);
+            } if(newTop<=0  ){
+                isSpeedY *= -1;
+                isSpeedY *= 0.8;
+                isSpeedX *= 0.8;
+                newTop=0;
+            } if(newLeft<=0){
+                isSpeedX *= -1;
+                isSpeedY *= 0.8;
+                isSpeedX *= 0.8;
+                newLeft=0;
+            } if(newLeft >=document.documentElement.clientWidth-dom.clientWidth){
+                isSpeedX *= -1;
+                isSpeedY *= 0.8;
+                isSpeedX *= 0.8;
+                newLeft =document.documentElement.clientWidth-dom.clientWidth;
+            }
+
+            if (Math.abs(isSpeedX)<1){
+                isSpeedX=0;
+                // clearInterval(dom.timer)
+            }
+            if (Math.abs(isSpeedY)<1){
+                isSpeedY=0;
+            }
+            if(isSpeedX==0 && isSpeedY==0 && newTop==document.documentElement.clientHeight - dom.clientHeight)
+                  clearInterval(dom.timer);
+            else{
+                dom.style.top=newTop + 'px';
+                dom.style.left=newLeft + 'px';
+            }
+           
+         console.log(11)
+        },30)
+    }
+    </script>
+
+
+    <!-- <script>
+        // 拖拽例子？？？
+     var div=document.getElementById('demo');
+     console.log(div);
+      div.onmousedown=function(e){
+        var event=event || e;
+        var disX=event.clientX - this.offsetLeft;
+        var disY=event.clientY - this.offsetTop;
+        var self = this;
+        document.onmousemove=function(e){
+            var event = event || e;
+            var newLeft = event.clientX -disX;
+            var newTop = event.clientY - disY;
+            self.style.left = newLeft +'px';
+            self.style.top = newTop + 'px';
+
+
+            // var oSpan = document.createElement('span');
+            // oSpan.style.position='absolute';
+            // oSpan.style.left = newLeft + 'px';
+            // oSpan.style.top = newTop +'px';
+            // oSpan.style.width ='5px';
+            // oSpan.style.height ='5px';
+            // oSpan.style.backgroundColor = 'black';
+            // document.body.appendChild(oSpan);
+
+        }
+        document.onmouseup = function (){
+            document.onmouseup = null ;
+            document.onmousemove = null;
+        }
+      }
+    </script> -->
+
+</body>
+</html>
