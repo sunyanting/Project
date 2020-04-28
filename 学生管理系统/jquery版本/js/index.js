@@ -189,7 +189,7 @@ function formatData(dataArr){
 // 数据请求
 function transferData(url, data, cb) {
     $.ajax({
-        url:'http://open.duyiedu.com'+url,
+        url:'https://open.duyiedu.com'+url,
         type:'get',
         data:$.extend({
             appkey:'zhaolixiang_1581772005468'
